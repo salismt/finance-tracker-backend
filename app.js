@@ -1,11 +1,12 @@
 const express = require('express');
 require('dotenv').config();
 const mongoose = require('mongoose');
-const financeRoutes = require('./routes/financeRoutes');
+const transactionRoutes = require('./routes/transactionRoutes');
 const categoryRoutes = require('./routes/categoryRoutes');
 const passport = require('passport');
 const session = require('express-session');
 require('./config/passportSetup'); // Ensure Passport is configured
+const isAuthenticated = require('./middlewares/authenticate');
 
 const authRoutes = require('./routes/authRoutes'); // Define authRoutes
 
@@ -29,7 +30,9 @@ mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTop
     .then(() => console.log('Connected to MongoDB'))
     .catch(err => console.error('Could not connect to MongoDB:', err));
 
-app.use('/api', financeRoutes);
+// Apply the authentication middleware to all routes except auth routes
+app.use('/api', isAuthenticated); // Protects all routes under '/api'
+app.use('/api/transactions', transactionRoutes);
 app.use('/api/categories', categoryRoutes);
 app.use('/auth', authRoutes);
 
