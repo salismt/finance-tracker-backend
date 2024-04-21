@@ -9,6 +9,7 @@ require('./config/passportSetup'); // Ensure Passport is configured
 const isAuthenticated = require('./middlewares/authenticate');
 
 const authRoutes = require('./routes/authRoutes'); // Define authRoutes
+const pingRoutes = require('./routes/pingRoutes');
 
 const app = express();
 app.use(express.json());
@@ -35,6 +36,7 @@ app.use('/api', isAuthenticated); // Protects all routes under '/api'
 app.use('/api/transactions', transactionRoutes);
 app.use('/api/categories', categoryRoutes);
 app.use('/auth', authRoutes);
+app.use('/ping', pingRoutes);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
