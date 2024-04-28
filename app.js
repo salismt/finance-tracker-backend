@@ -13,21 +13,9 @@ const authRoutes = require('./routes/authRoutes'); // Define authRoutes
 const pingRoutes = require('./routes/pingRoutes');
 const dashboardRoutes = require('./routes/dashboardRoutes')
 
-const whitelist = ['http://localhost:8080', 'https://salismt.github.io']; // assuming front-end application is running on localhost port 3000
-
-const corsOptions = {
-    origin: function (origin, callback) {
-        if (whitelist.indexOf(origin) !== -1) {
-            callback(null, true)
-        } else {
-            callback(new Error('Not allowed by CORS'))
-        }
-    }
-}
-
 const app = express();
 app.use(express.json());
-app.use(cors(corsOptions));
+app.use(cors());
 
 // Express session
 app.use(
