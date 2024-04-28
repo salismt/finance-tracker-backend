@@ -10,6 +10,7 @@ const isAuthenticated = require('./middlewares/authenticate');
 
 const authRoutes = require('./routes/authRoutes'); // Define authRoutes
 const pingRoutes = require('./routes/pingRoutes');
+const dashboardRoutes = require('./routes/dashboardRoutes')
 
 const app = express();
 app.use(express.json());
@@ -35,6 +36,7 @@ mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTop
 app.use('/api', isAuthenticated); // Protects all routes under '/api'
 app.use('/api/transactions', transactionRoutes);
 app.use('/api/categories', categoryRoutes);
+app.use('/api/dashboard', dashboardRoutes);
 app.use('/auth', authRoutes);
 app.use('/ping', pingRoutes);
 

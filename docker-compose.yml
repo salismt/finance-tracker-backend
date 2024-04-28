@@ -11,6 +11,7 @@ services:
       - MONGODB_URI=mongodb://mongo:27017/financial_tracker
       - GOOGLE_CLIENT_ID=your-google-client-id
       - GOOGLE_CLIENT_SECRET=your-google-client-secret
+      - JWT_SECRET=jwt-secret
     depends_on:
       - mongo
     networks:

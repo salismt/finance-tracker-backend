@@ -2,8 +2,10 @@ const Transaction = require('../models/Transaction');
 
 exports.getTransactions = async (req, res) => {
     try {
-        const transactions = await Transaction.find();
-        res.json(transactions);
+        const transactionData = await Transaction.find();
+        res.json({
+            transactions: transactionData
+        });
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
@@ -12,13 +14,15 @@ exports.getTransactions = async (req, res) => {
 exports.getTransactionsByDate = async (req, res) => {
     try {
         const { startDate, endDate } = req.query;
-        const transactions = await Transaction.find({
+        const transactionData = await Transaction.find({
             date: {
                 $gte: startDate,
                 $lte: endDate
             }
         });
-        res.json(transactions);
+        res.json({
+            transactions: transactionData
+        });
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
@@ -37,8 +41,8 @@ exports.getTotalExpenseAndIncome = async (req, res) => {
         ]);
 
         res.json({
-            totalExpenses: expenses[0] ? expenses[0].total : 0,
-            totalIncomes: incomes[0] ? incomes[0].total : 0
+            total_expense: expenses[0] ? expenses[0].total : 0,
+            total_income: incomes[0] ? incomes[0].total : 0
         });
     } catch (err) {
         res.status(500).json({ message: err.message });
@@ -62,7 +66,7 @@ exports.getCurrentBalance = async (req, res) => {
 
         const currentBalance = totalIncomes - totalExpenses;
 
-        res.json({ currentBalance });
+        res.json({ current_balance: currentBalance });
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
