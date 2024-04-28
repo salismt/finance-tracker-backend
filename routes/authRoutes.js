@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
+const User = require('../models/User');
 
 const generateToken = user => {
     return jwt.sign({
@@ -32,6 +33,40 @@ router.get('/google/callback', passport.authenticate('google', { session: false 
             id: req.user.id,
             name: req.user.displayName,
             email: req.user.emails[0].value
+        }
+    });
+});
+
+// Signup Route
+router.post('/signup', async (req, res) => {
+    const { name, email, password } = req.body;
+    try {
+        const existingUser = await User.findOne({ email });
+        if (existingUser) {
+            return res.status(400).json({ message: "Email already in use" });
+        }
+        const newUser = new User({ name, email, password });
+        await newUser.save();
+        res.status(201).json({ message: "User created successfully" });
+    } catch (error) {
+        res.status(500).json({ message: "Error registering new user" });
+    }
+});
+
+// Login Route for Local Strategy
+router.post('/login', passport.authenticate('local', { session: false }), (req, res) => {
+    if (!req.user) {
+        return res.status(401).json({ message: 'Login failed' });
+    }
+
+    const token = generateToken(req.user);
+    res.json({
+        success: true,
+        token: token,
+        user: {
+            id: req.user._id,
+            name: req.user.name,
+            email: req.user.email
         }
     });
 });
