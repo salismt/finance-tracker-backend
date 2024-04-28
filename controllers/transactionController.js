@@ -2,7 +2,9 @@ const Transaction = require('../models/Transaction');
 
 exports.getTransactions = async (req, res) => {
     try {
-        const transactionData = await Transaction.find();
+        const transactionData = await Transaction.find({
+            user_id: req.user._id
+        });
         res.json({
             transactions: transactionData
         });
@@ -15,6 +17,7 @@ exports.getTransactionsByDate = async (req, res) => {
     try {
         const { startDate, endDate } = req.query;
         const transactionData = await Transaction.find({
+            user_id: req.user._id,
             date: {
                 $gte: startDate,
                 $lte: endDate
@@ -30,13 +33,14 @@ exports.getTransactionsByDate = async (req, res) => {
 
 exports.getTotalExpenseAndIncome = async (req, res) => {
     try {
+        const userId = req.user._id;
         const expenses = await Transaction.aggregate([
-            { $match: { type: 'expense' } },
+            { $match: { user_id: userId, type: 'expense' } },
             { $group: { _id: null, total: { $sum: '$amount' } } }
         ]);
 
         const incomes = await Transaction.aggregate([
-            { $match: { type: 'income' } },
+            { $match: { user_id: userId, type: 'income' } },
             { $group: { _id: null, total: { $sum: '$amount' } } }
         ]);
 
@@ -51,13 +55,14 @@ exports.getTotalExpenseAndIncome = async (req, res) => {
 
 exports.getCurrentBalance = async (req, res) => {
     try {
+        const userId = req.user._id;
         const expenses = await Transaction.aggregate([
-            { $match: { type: 'expense' } },
+            { $match: { user_id: userId, type: 'expense' } },
             { $group: { _id: null, total: { $sum: '$amount' } } }
         ]);
 
         const incomes = await Transaction.aggregate([
-            { $match: { type: 'income' } },
+            { $match: {user_id: userId,  type: 'income' } },
             { $group: { _id: null, total: { $sum: '$amount' } } }
         ]);
 
@@ -79,7 +84,8 @@ exports.addTransaction = async (req, res) => {
         date: req.body.date,
         currency: req.body.currency,
         amount: req.body.amount,
-        type: req.body.type
+        type: req.body.type,
+        user_id: req.user._id
     });
 
     try {

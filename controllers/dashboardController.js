@@ -2,14 +2,15 @@ const Transaction = require("../models/Transaction");
 const Category = require("../models/Category");
 exports.getDashboard = async (req, res) => {
     try {
-        const expenses = await Transaction.aggregate([{$match: {type: 'expense'}}, {
+        const userId = req.user._id;
+        const expenses = await Transaction.aggregate([{$match: { user_id: userId, type: 'expense'}}, {
             $group: {
                 _id: null,
                 total: {$sum: '$amount'}
             }
         }]);
 
-        const incomes = await Transaction.aggregate([{$match: {type: 'income'}}, {
+        const incomes = await Transaction.aggregate([{$match: { user_id: userId, type: 'income'}}, {
             $group: {
                 _id: null,
                 total: {$sum: '$amount'}
