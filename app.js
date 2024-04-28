@@ -1,6 +1,7 @@
 const express = require('express');
 require('dotenv').config();
 const mongoose = require('mongoose');
+const cors = require('cors');
 const transactionRoutes = require('./routes/transactionRoutes');
 const categoryRoutes = require('./routes/categoryRoutes');
 const passport = require('passport');
@@ -12,8 +13,21 @@ const authRoutes = require('./routes/authRoutes'); // Define authRoutes
 const pingRoutes = require('./routes/pingRoutes');
 const dashboardRoutes = require('./routes/dashboardRoutes')
 
+const whitelist = ['http://localhost:8080', 'https://salismt.github.io']; // assuming front-end application is running on localhost port 3000
+
+const corsOptions = {
+    origin: function (origin, callback) {
+        if (whitelist.indexOf(origin) !== -1) {
+            callback(null, true)
+        } else {
+            callback(new Error('Not allowed by CORS'))
+        }
+    }
+}
+
 const app = express();
 app.use(express.json());
+app.use(cors(corsOptions));
 
 // Express session
 app.use(
