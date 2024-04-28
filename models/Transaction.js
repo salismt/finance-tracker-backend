@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const {getAmount} = require("./numberHelper");
 
 const transactionSchema = new mongoose.Schema({
     name: {
@@ -13,24 +14,12 @@ const transactionSchema = new mongoose.Schema({
     },
     date: {
         type: String,
-        required: true,
-        validate: {
-            validator: function(v) {
-                return /\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z/.test(v);
-            },
-            message: props => `${props.value} is not a valid RFC 3339 date!`
-        }
+        required: true
     },
     currency: {
         type: String,
         required: true,
-        trim: true,
-        validate: {
-            validator: function(v) {
-                return /^[A-Z]{3}$/.test(v);
-            },
-            message: props => `${props.value} is not a valid ISO 4217 currency code!`
-        }
+        trim: true
     },
     amount: {
         type: mongoose.Schema.Types.Decimal128,
@@ -40,7 +29,8 @@ const transactionSchema = new mongoose.Schema({
                 return v.toString().match(/^\d+(\.\d{1,2})?$/);
             },
             message: props => `${props.value} is not a valid 2 decimal digit number!`
-        }
+        },
+        get: getAmount
     },
     type: {
         type: String,
@@ -49,6 +39,8 @@ const transactionSchema = new mongoose.Schema({
         enum: ['income', 'expense']
     },
     user_id: { type: 'ObjectId', ref: 'User' }
+}, {
+    toJSON: { getters: true }
 });
 
 const Transaction = mongoose.model('Transaction', transactionSchema);

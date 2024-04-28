@@ -1,8 +1,9 @@
 const Transaction = require("../models/Transaction");
 const Category = require("../models/Category");
+const {ObjectId} = require("mongodb");
 exports.getDashboard = async (req, res) => {
     try {
-        const userId = req.user._id;
+        const userId = new ObjectId(req.user.id);
         const expenses = await Transaction.aggregate([{$match: { user_id: userId, type: 'expense'}}, {
             $group: {
                 _id: null,
@@ -25,13 +26,13 @@ exports.getDashboard = async (req, res) => {
         const categories = await Category.find();
 
         res.json({
-            current_balance: currentBalance,
-            total_expense: totalExpenses,
-            total_income: totalIncomes,
+            current_balance: currentBalance.toString(),
+            total_expense: totalExpenses.toString(),
+            total_income: totalIncomes.toString(),
             balance_history: [{
-                "date": "2024-01-15T00:00:00+00:00", "balance": 7000
+                "date": "2024-01-15T00:00:00+00:00", "balance": "70000"
             }, {
-                "date": "2024-01-16T00:00:00+00:00", "balance": 8000
+                "date": "2024-01-16T00:00:00+00:00", "balance": "80000"
             }],
             categories: categories,
             statements: transactionData
