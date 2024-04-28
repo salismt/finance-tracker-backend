@@ -35,7 +35,7 @@ exports.getDashboard = async (req, res) => {
                 "date": "2024-01-16T00:00:00+00:00", "balance": "80000"
             }],
             categories: categories,
-            statements: transactionData
+            transactions: transactionData
         })
     } catch (err) {
         res.status(500).json({message: err.message});
