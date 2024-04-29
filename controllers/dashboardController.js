@@ -22,18 +22,15 @@ exports.getDashboard = async (req, res) => {
         const totalIncomes = incomes[0] ? parseFloat(incomes[0].total.toString()) : 0;
 
         const currentBalance = totalIncomes - totalExpenses;
-        const transactionData = await Transaction.find();
+        const transactionData = await Transaction.find({
+            user_id: userId
+        });
         const categories = await Category.find();
 
         res.json({
             current_balance: currentBalance.toString(),
             total_expense: totalExpenses.toString(),
             total_income: totalIncomes.toString(),
-            balance_history: [{
-                "date": "2024-01-15T00:00:00+00:00", "balance": "70000"
-            }, {
-                "date": "2024-01-16T00:00:00+00:00", "balance": "80000"
-            }],
             categories: categories,
             transactions: transactionData
         })

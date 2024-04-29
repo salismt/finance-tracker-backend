@@ -26,7 +26,7 @@ gcloud run deploy finance-tracker-backend \
     --image gcr.io/edinburgh-finance-tracker/finance-tracker-backend \
     --platform managed \
     --allow-unauthenticated \
-    --update-env-vars MONGODB_URI="mongodb+srv://mongo:localhost123@edinburgh-finance-proje.hwx6tfh.mongodb.net/?retryWrites=true&w=majority&appName=edinburgh-finance-project",GOOGLE_CLIENT_ID="48728494160-nutuf32pt2s28nh7691vfss1a81iulfk.apps.googleusercontent.com",GOOGLE_CLIENT_SECRET="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,JWT_SECRET=FINANCE_TRACKER_SECRET"
+    --update-env-vars MONGODB_URI="mongodb+srv://mongo:localhost123@edinburgh-finance-proje.hwx6tfh.mongodb.net/test?retryWrites=true&w=majority&appName=edinburgh-finance-project",GOOGLE_CLIENT_ID="48728494160-nutuf32pt2s28nh7691vfss1a81iulfk.apps.googleusercontent.com",GOOGLE_CLIENT_SECRET="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,JWT_SECRET=FINANCE_TRACKER_SECRET"
 ```
 
 Then select asia-southeast1 when the prompt comes
