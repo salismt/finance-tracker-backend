@@ -1,0 +1,220 @@
+{
+	"info": {
+		"_postman_id": "1bd722ac-1a99-415a-beb6-78fae50aacc6",
+		"name": "edinburgh-finance-tracker",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "2352239"
+	},
+	"item": [
+		{
+			"name": "POST Signup",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"salis\",\n    \"email\": \"salis@mail.com\",\n    \"password\": \"123456\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:3000/auth/signup"
+			},
+			"response": []
+		},
+		{
+			"name": "GET Ping",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:3000/ping"
+			},
+			"response": []
+		},
+		{
+			"name": "POST Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"salis@mail.com\",\n    \"password\": \"123456\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:3000/auth/login"
+			},
+			"response": []
+		},
+		{
+			"name": "GET Categories",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MmU5YTYxMDNjOTA2MGYzNzIyNGQ1NSIsImVtYWlsIjoic2FsaXNAbWFpbC5jb20iLCJuYW1lIjoic2FsaXMiLCJpYXQiOjE3MTQzMzA1NjUsImV4cCI6MTcxNDUwMzM2NX0.bzVTBqhhlia5Fx_EgIZWR8hBf-NXy7ZxoXpbqCKVwPo"
+					}
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "text"
+					}
+				],
+				"url": "http://localhost:3000/api/categories"
+			},
+			"response": []
+		},
+		{
+			"name": "POST Add Categories",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MmU5YTYxMDNjOTA2MGYzNzIyNGQ1NSIsImVtYWlsIjoic2FsaXNAbWFpbC5jb20iLCJuYW1lIjoic2FsaXMiLCJpYXQiOjE3MTQzMzA1NjUsImV4cCI6MTcxNDUwMzM2NX0.bzVTBqhhlia5Fx_EgIZWR8hBf-NXy7ZxoXpbqCKVwPo"
+					}
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"key\": \"gift\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:3000/api/categories"
+			},
+			"response": []
+		},
+		{
+			"name": "POST Add Transaction",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MmU5YTYxMDNjOTA2MGYzNzIyNGQ1NSIsImVtYWlsIjoic2FsaXNAbWFpbC5jb20iLCJuYW1lIjoic2FsaXMiLCJpYXQiOjE3MTQzMzA1NjUsImV4cCI6MTcxNDUwMzM2NX0.bzVTBqhhlia5Fx_EgIZWR8hBf-NXy7ZxoXpbqCKVwPo"
+					}
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"mcdonald\",\n    \"category\": \"foods\",\n    \"date\": \"2024-04-25T12:30:00\",\n    \"currency\": \"IDR\",\n    \"amount\": 5000,\n    \"type\": \"expense\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:3000/api/transactions"
+			},
+			"response": []
+		},
+		{
+			"name": "GET Transaction History",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MmU5YTYxMDNjOTA2MGYzNzIyNGQ1NSIsImVtYWlsIjoic2FsaXNAbWFpbC5jb20iLCJuYW1lIjoic2FsaXMiLCJpYXQiOjE3MTQzMzA1NjUsImV4cCI6MTcxNDUwMzM2NX0.bzVTBqhhlia5Fx_EgIZWR8hBf-NXy7ZxoXpbqCKVwPo"
+					}
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "text"
+					}
+				],
+				"url": "http://localhost:3000/api/transactions"
+			},
+			"response": []
+		},
+		{
+			"name": "GET Total Expense and Income",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MmU5YTYxMDNjOTA2MGYzNzIyNGQ1NSIsImVtYWlsIjoic2FsaXNAbWFpbC5jb20iLCJuYW1lIjoic2FsaXMiLCJpYXQiOjE3MTQzMzA1NjUsImV4cCI6MTcxNDUwMzM2NX0.bzVTBqhhlia5Fx_EgIZWR8hBf-NXy7ZxoXpbqCKVwPo"
+					}
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "text"
+					}
+				],
+				"url": "http://localhost:3000/api/transactions/totals"
+			},
+			"response": []
+		},
+		{
+			"name": "GET Total Balance",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MmU5YTYxMDNjOTA2MGYzNzIyNGQ1NSIsImVtYWlsIjoic2FsaXNAbWFpbC5jb20iLCJuYW1lIjoic2FsaXMiLCJpYXQiOjE3MTQzMzA1NjUsImV4cCI6MTcxNDUwMzM2NX0.bzVTBqhhlia5Fx_EgIZWR8hBf-NXy7ZxoXpbqCKVwPo"
+					}
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "text"
+					}
+				],
+				"url": "http://localhost:3000/api/transactions/balance"
+			},
+			"response": []
+		},
+		{
+			"name": "GET Dashboard",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MmU5YTYxMDNjOTA2MGYzNzIyNGQ1NSIsImVtYWlsIjoic2FsaXNAbWFpbC5jb20iLCJuYW1lIjoic2FsaXMiLCJpYXQiOjE3MTQzMzA1NjUsImV4cCI6MTcxNDUwMzM2NX0.bzVTBqhhlia5Fx_EgIZWR8hBf-NXy7ZxoXpbqCKVwPo"
+					}
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "text"
+					}
+				],
+				"url": "http://localhost:3000/api/dashboard"
+			},
+			"response": []
+		}
+	]
+}
