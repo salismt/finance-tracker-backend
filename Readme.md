@@ -1,3 +1,12 @@
+### How to run this locally
+1. Make sure you have mongodb installed and running, you can check via mongosh
+```
+mongo
+>
+```
+2. make sure port `3000` is available
+3. run the app `npm run start`
+
 ### How to deploy
 
 Commit the changes
